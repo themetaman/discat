@@ -496,7 +496,8 @@ def main():
             
             if instance_id not in cached_items:
                 new_items.append(item)
-            elif item.get('date_added') != cached_items[instance_id].get('date_added'):
+            elif (item.get('date_added') != cached_items[instance_id].get('date_added') or
+                  item.get('folder_id') != cached_items[instance_id].get('folder_id')):
                 changed_items.append(item)
             else:
                 unchanged_items.append(cached_items[instance_id])
