@@ -28,10 +28,11 @@ class DiscogsGUI:
         # Variables
         self.token_var = tk.StringVar()
         self.username_var = tk.StringVar()
+        self.output_dir_var = tk.StringVar(value=os.getcwd())
         self.download_thread = None
         self.sync_thread = None
         
-        # Load saved credentials if they exist
+        # Load saved credentials and preferences if they exist
         self.load_credentials()
         
         # Create UI
@@ -100,7 +101,6 @@ class DiscogsGUI:
         output_frame.pack(fill='x', pady=5)
         
         ttk.Label(output_frame, text="Save to:").pack(side='left')
-        self.output_dir_var = tk.StringVar(value=os.getcwd())
         ttk.Entry(output_frame, textvariable=self.output_dir_var, width=40).pack(side='left', padx=5)
         ttk.Button(output_frame, text="Browse...", command=self.browse_output_dir).pack(side='left')
         
@@ -331,9 +331,10 @@ DisCat makes managing your music collection purr-fect! 🎵"""
             self.token_entry.configure(show='*')
     
     def save_credentials(self):
-        """Save credentials to config.env file (shared with CLI scripts)."""
+        """Save credentials and preferences to config.env file (shared with CLI scripts)."""
         token = self.token_var.get().strip()
         username = self.username_var.get().strip()
+        output_dir = self.output_dir_var.get().strip()
         
         if not token or not username:
             messagebox.showwarning("Missing Info", "Please enter both token and username")
@@ -346,9 +347,10 @@ DisCat makes managing your music collection purr-fect! 🎵"""
                 with open('config.env', 'r') as f:
                     config_lines = f.readlines()
             
-            # Update or add credentials
+            # Update or add credentials and preferences
             found_token = False
             found_username = False
+            found_output_dir = False
             new_lines = []
             
             for line in config_lines:
@@ -358,6 +360,9 @@ DisCat makes managing your music collection purr-fect! 🎵"""
                 elif line.strip().startswith('DISCOGS_USERNAME='):
                     new_lines.append(f'DISCOGS_USERNAME={username}\n')
                     found_username = True
+                elif line.strip().startswith('OUTPUT_DIR='):
+                    new_lines.append(f'OUTPUT_DIR={output_dir}\n')
+                    found_output_dir = True
                 else:
                     new_lines.append(line)
             
@@ -366,17 +371,19 @@ DisCat makes managing your music collection purr-fect! 🎵"""
                 new_lines.append(f'DISCOGS_TOKEN={token}\n')
             if not found_username:
                 new_lines.append(f'DISCOGS_USERNAME={username}\n')
+            if not found_output_dir and output_dir:
+                new_lines.append(f'OUTPUT_DIR={output_dir}\n')
             
             # Write config.env
             with open('config.env', 'w') as f:
                 f.writelines(new_lines)
             
-            messagebox.showinfo("Success", "Credentials saved to config.env!\n\nThese credentials work with both GUI and CLI scripts.")
+            messagebox.showinfo("Success", "Settings saved to config.env!\n\nCredentials and preferences work with both GUI and CLI scripts.")
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to save credentials: {e}")
+            messagebox.showerror("Error", f"Failed to save settings: {e}")
     
     def load_credentials(self):
-        """Load credentials from config.env file (shared with CLI scripts)."""
+        """Load credentials and preferences from config.env file (shared with CLI scripts)."""
         if os.path.exists('config.env'):
             try:
                 with open('config.env', 'r') as f:
@@ -386,6 +393,10 @@ DisCat makes managing your music collection purr-fect! 🎵"""
                             self.token_var.set(line.split('=', 1)[1])
                         elif line.startswith('DISCOGS_USERNAME='):
                             self.username_var.set(line.split('=', 1)[1])
+                        elif line.startswith('OUTPUT_DIR='):
+                            output_dir = line.split('=', 1)[1]
+                            if output_dir and os.path.exists(output_dir):
+                                self.output_dir_var.set(output_dir)
             except Exception as e:
                 pass  # If can't load, just start with empty fields
     
