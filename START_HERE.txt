@@ -1,0 +1,85 @@
+     /\_/\  
+    ( o.o ) 
+     > ^ <   
+
+╔════════════════════════════════════════════════════════════════╗
+║                  Welcome to DisCat! 🐱                         ║
+║           Discogs Collection Manager v1.0                      ║
+╚════════════════════════════════════════════════════════════════╝
+
+Thanks for downloading DisCat - the purr-fect tool for managing
+your Discogs music collection!
+
+🚀 QUICK START (3 STEPS)
+═══════════════════════════════════════════════════════════════════
+
+1. Install Python & requests library
+   See INSTALL.txt for detailed instructions
+
+2. Get your Discogs API token
+   Visit: https://www.discogs.com/settings/developers
+
+3. Run DisCat GUI
+   python discogs_gui.py
+
+That's it! DisCat will guide you through the rest.
+
+📚 DOCUMENTATION
+═══════════════════════════════════════════════════════════════════
+
+  INSTALL.txt              - Installation instructions
+  README.md                - Complete documentation  
+  QUICKSTART.md            - Quick reference guide
+  CACHING_GUIDE.md         - Speed optimization
+  CUSTOM_FIELDS_GUIDE.md   - Sync workflows
+  DROPDOWN_FIELDS_GUIDE.md - Validation guide
+
+💡 WHAT DisCat DOES
+═══════════════════════════════════════════════════════════════════
+
+✓ Downloads your complete Discogs collection
+✓ Gets ALL metadata (genres, styles, credits, pricing)
+✓ Exports to timestamped CSV files
+✓ Includes your custom field values
+✓ Syncs metadata to custom fields
+✓ Smart caching (5-10x faster updates!)
+✓ Folder organization support
+✓ Beautiful GUI + command-line tools
+
+⚡ FEATURES
+═══════════════════════════════════════════════════════════════════
+
+GUI APPLICATION (Recommended)
+  → Point and click interface
+  → Real-time progress tracking
+  → All features in one place
+
+COMMAND LINE TOOLS
+  → 1_download_collection.py (with -c for cache)
+  → 2_sync_custom_fields.py (preview before sync)
+
+SPEED
+  → First download: ~15-20 minutes
+  → With cache (-c): ~2 minutes! ⚡
+
+OUTPUT
+  → CSV files (open in Excel)
+  → JSON backups (complete data)
+  → Summary reports (collection stats)
+
+🆘 NEED HELP?
+═══════════════════════════════════════════════════════════════════
+
+Read the documentation - it covers everything!
+
+Start with:
+  1. INSTALL.txt (get started)
+  2. README.md (full guide)
+  3. QUICKSTART.md (common tasks)
+
+     /\_/\  
+    ( ^.^ ) 
+     > ^ <   
+
+Enjoy organizing your collection with DisCat! 🎵
+

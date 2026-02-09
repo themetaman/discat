@@ -1,0 +1,118 @@
+╔════════════════════════════════════════════════════════════════╗
+║                      DisCat 🐱                                 ║
+║              Discogs Collection Manager                        ║
+║              Installation Instructions                         ║
+╚════════════════════════════════════════════════════════════════╝
+
+     /\_/\  
+    ( o.o ) 
+     > ^ <   DisCat - Making collection management purr-fect!
+
+📦 PACKAGE CONTENTS
+═══════════════════════════════════════════════════════════════════
+
+APPLICATIONS:
+  discogs_gui.py                  - DisCat GUI (RECOMMENDED)
+  1_download_collection.py        - Download script with cache
+  2_sync_custom_fields.py         - Sync metadata to custom fields
+
+DOCUMENTATION:
+  README.md                       - Complete documentation
+  QUICKSTART.md                   - Quick reference guide
+  CACHING_GUIDE.md               - Caching system guide
+  CUSTOM_FIELDS_GUIDE.md         - Custom fields workflows
+  DROPDOWN_FIELDS_GUIDE.md       - Dropdown validation guide
+
+🚀 QUICK START
+═══════════════════════════════════════════════════════════════════
+
+1. INSTALL PYTHON
+   Download from: https://www.python.org/downloads/
+   ✓ Check "Add Python to PATH" during installation
+
+2. INSTALL REQUIRED LIBRARY
+   Open Command Prompt (Windows) or Terminal (Mac/Linux):
+   
+   pip install requests
+
+3. GET DISCOGS API TOKEN
+   Visit: https://www.discogs.com/settings/developers
+   Click "Generate new token"
+   Copy the token
+
+4. RUN DisCat GUI (EASIEST)
+   
+   python discogs_gui.py
+   
+   Then:
+   - Go to Settings tab
+   - Enter your token and username
+   - Click "Save Credentials"
+   - Go to Download tab
+   - Click "Download Collection"
+
+5. OR USE COMMAND LINE
+   
+   Edit 1_download_collection.py:
+   - Change USER_TOKEN to your token
+   - Change USERNAME to your username
+   
+   Then run:
+   python 1_download_collection.py -c
+
+📋 WHAT YOU GET
+═══════════════════════════════════════════════════════════════════
+
+OUTPUT FILES:
+  discogs_collection_YYYYMMDD_HHMMSS.csv  - Timestamped export
+  discogs_collection_YYYYMMDD_HHMMSS.json - Complete backup
+  discogs_report.txt                      - Summary statistics
+  discogs_cache.json                      - Cache (auto-managed)
+
+CSV INCLUDES:
+  ✓ Download timestamp
+  ✓ Folder names (Electronic, Funk, etc.)
+  ✓ All Discogs metadata
+  ✓ Full marketplace pricing
+  ✓ Community statistics
+  ✓ Your custom field values
+
+⚡ SPEED WITH CACHING
+═══════════════════════════════════════════════════════════════════
+
+FIRST DOWNLOAD:  15-20 minutes (full collection)
+WITH CACHE (-c): 2 minutes (only new/changed items)
+
+GUI: Check "Use cache" box
+Command Line: Use -c flag
+
+💡 DisCat FEATURES
+═══════════════════════════════════════════════════════════════════
+
+✓ Incremental caching (5-10x faster updates)
+✓ Timestamped exports (track changes over time)
+✓ Folder organization support
+✓ Full marketplace pricing data
+✓ Automatic master release fallback
+✓ 15+ metadata sync options
+✓ Dropdown validation
+✓ Smart rate limiting
+✓ Beautiful GUI interface
+✓ Command-line tools for automation
+
+📚 DOCUMENTATION
+═══════════════════════════════════════════════════════════════════
+
+Start with README.md for complete guide
+Check QUICKSTART.md for common use cases
+See CACHING_GUIDE.md for speed optimization
+
+🆘 SUPPORT
+═══════════════════════════════════════════════════════════════════
+
+All documentation is included in this package.
+Read README.md for troubleshooting section.
+
+     /\_/\  
+    ( ^.^ ) 
+     > ^ <   Happy collecting with DisCat! 🎵
