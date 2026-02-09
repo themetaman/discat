@@ -1,6 +1,6 @@
 # DisCat 🐱
 
-**Discogs Collection Manager**
+**Discogs Catalogue Manager**
 
 The purr-fect tool for downloading and managing your Discogs music collection!
 
