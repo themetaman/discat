@@ -266,7 +266,8 @@ class DiscogsGUI:
         token_frame.pack(fill='x', pady=5)
         
         ttk.Label(token_frame, text="API Token:", width=15).pack(side='left')
-        ttk.Entry(token_frame, textvariable=self.token_var, width=50, show='*').pack(side='left', padx=5)
+        self.token_entry = ttk.Entry(token_frame, textvariable=self.token_var, width=50, show='*')
+        self.token_entry.pack(side='left', padx=5)
         ttk.Button(token_frame, text="Show", command=self.toggle_token).pack(side='left')
         
         # Username
@@ -320,10 +321,11 @@ DisCat makes managing your music collection purr-fect! 🎵"""
     
     def toggle_token(self):
         """Toggle token visibility."""
-        current = self.root.nametowidget(str(self.root.focus_get()))
-        if hasattr(current, 'configure'):
-            show = current.cget('show')
-            current.configure(show='' if show else '*')
+        current_show = self.token_entry.cget('show')
+        if current_show == '*':
+            self.token_entry.configure(show='')
+        else:
+            self.token_entry.configure(show='*')
     
     def save_credentials(self):
         """Save credentials to file."""
