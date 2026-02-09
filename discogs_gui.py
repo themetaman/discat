@@ -307,6 +307,9 @@ A simple tool to download and manage your Discogs collection.
 • Sync metadata to custom fields
 • Export to CSV for Excel analysis
 
+Configuration is saved to config.env and works with both
+GUI and command-line tools!
+
 DisCat makes managing your music collection purr-fect! 🎵"""
         
         ttk.Label(about_frame, text=about_text, justify='left').pack(anchor='w')
@@ -328,29 +331,63 @@ DisCat makes managing your music collection purr-fect! 🎵"""
             self.token_entry.configure(show='*')
     
     def save_credentials(self):
-        """Save credentials to file."""
-        creds = {
-            'token': self.token_var.get(),
-            'username': self.username_var.get()
-        }
+        """Save credentials to config.env file (shared with CLI scripts)."""
+        token = self.token_var.get().strip()
+        username = self.username_var.get().strip()
+        
+        if not token or not username:
+            messagebox.showwarning("Missing Info", "Please enter both token and username")
+            return
         
         try:
-            with open('discogs_credentials.json', 'w') as f:
-                json.dump(creds, f)
-            messagebox.showinfo("Success", "Credentials saved!")
+            # Read existing config.env if it exists
+            config_lines = []
+            if os.path.exists('config.env'):
+                with open('config.env', 'r') as f:
+                    config_lines = f.readlines()
+            
+            # Update or add credentials
+            found_token = False
+            found_username = False
+            new_lines = []
+            
+            for line in config_lines:
+                if line.strip().startswith('DISCOGS_TOKEN='):
+                    new_lines.append(f'DISCOGS_TOKEN={token}\n')
+                    found_token = True
+                elif line.strip().startswith('DISCOGS_USERNAME='):
+                    new_lines.append(f'DISCOGS_USERNAME={username}\n')
+                    found_username = True
+                else:
+                    new_lines.append(line)
+            
+            # Add if not found
+            if not found_token:
+                new_lines.append(f'DISCOGS_TOKEN={token}\n')
+            if not found_username:
+                new_lines.append(f'DISCOGS_USERNAME={username}\n')
+            
+            # Write config.env
+            with open('config.env', 'w') as f:
+                f.writelines(new_lines)
+            
+            messagebox.showinfo("Success", "Credentials saved to config.env!\n\nThese credentials work with both GUI and CLI scripts.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to save credentials: {e}")
     
     def load_credentials(self):
-        """Load credentials from file."""
-        try:
-            if os.path.exists('discogs_credentials.json'):
-                with open('discogs_credentials.json', 'r') as f:
-                    creds = json.load(f)
-                self.token_var.set(creds.get('token', ''))
-                self.username_var.set(creds.get('username', ''))
-        except:
-            pass
+        """Load credentials from config.env file (shared with CLI scripts)."""
+        if os.path.exists('config.env'):
+            try:
+                with open('config.env', 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line.startswith('DISCOGS_TOKEN='):
+                            self.token_var.set(line.split('=', 1)[1])
+                        elif line.startswith('DISCOGS_USERNAME='):
+                            self.username_var.set(line.split('=', 1)[1])
+            except Exception as e:
+                pass  # If can't load, just start with empty fields
     
     def log_message(self, widget, message):
         """Add message to log widget."""

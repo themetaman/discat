@@ -48,17 +48,26 @@ DOCUMENTATION:
    - Go to Settings tab
    - Enter your token and username
    - Click "Save Credentials"
+   - This creates config.env (works with CLI too!)
    - Go to Download tab
    - Click "Download Collection"
 
 5. OR USE COMMAND LINE
    
-   Edit 1_download_collection.py:
+   Option A - Use config.env (recommended):
+   - Copy config.env.example to config.env
+   - Edit config.env with your credentials
+   
+   Option B - Edit script directly:
+   - Open 1_download_collection.py
    - Change USER_TOKEN to your token
    - Change USERNAME to your username
    
    Then run:
    python 1_download_collection.py -c
+
+   💡 TIP: Credentials saved in GUI (config.env) automatically
+       work with command-line scripts!
 
 📋 WHAT YOU GET
 ═══════════════════════════════════════════════════════════════════

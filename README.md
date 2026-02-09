@@ -56,25 +56,30 @@ pip install requests
 
 ### 3. Configure DisCat
 
-**Three ways to configure (choose one):**
+**All configuration now uses a single `config.env` file!**
 
 #### Option A: GUI Settings (Easiest)
 ```cmd
 python discogs_gui.py
 ```
-Go to Settings tab → Enter credentials → Save
+1. Go to Settings tab
+2. Enter token and username  
+3. Click "Save Credentials"
+4. Creates/updates `config.env` automatically
 
-#### Option B: config.env File (Recommended for CLI)
+**Your credentials now work with BOTH GUI and CLI scripts!**
+
+#### Option B: Create config.env Manually
 ```cmd
 # Copy the example file
 cp config.env.example config.env
 
-# Edit config.env and add your credentials
-# DISCOGS_TOKEN=your_actual_token
-# DISCOGS_USERNAME=your_username
+# Edit config.env with your credentials
+DISCOGS_TOKEN=your_actual_token
+DISCOGS_USERNAME=your_username
 ```
 
-#### Option C: Edit Scripts Directly
+#### Option C: Edit Scripts Directly (Old School)
 Open `1_download_collection.py` and `2_sync_custom_fields.py`, find:
 ```python
 USER_TOKEN = "YOUR_DISCOGS_TOKEN_HERE"
@@ -82,7 +87,7 @@ USERNAME = "YOUR_USERNAME_HERE"
 ```
 Replace with your actual credentials.
 
-> **Security Note:** `config.env` is in `.gitignore` - your credentials won't be committed if you fork this repo.
+> **One Config File, All Tools:** Whether you use GUI or CLI, credentials are shared via `config.env`. No more managing multiple credential files!
 
 ### 4. Download Your Collection
 
